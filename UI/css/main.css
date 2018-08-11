@@ -1,6 +1,5 @@
 body{
     background: rgba(0, 0, 0, 0.9);    
-    width: 100%;
 }
 .flex-container{
     display: flex;
@@ -8,7 +7,7 @@ body{
     width: inherit;
 }
 .navbar{
-    background-color: rgba(0, 0, 0, .1);
+    background-color: rgba(0, 0, 0, .4);
     height: 8vh;
     margin-top: -8px;
     margin-left: -8px;
@@ -82,16 +81,13 @@ body{
         margin: auto;
     }
     .signupLinks{
+        display: flex;
         width: 100%;
         margin-left: 0px;
+        flex-wrap: wrap;
     }    
     .navbar {
-        width: 100%;
-        margin-right: -20px;
+        height: 5%;        
     }
-    .signupmenu li, .menu li{
-        display: inline;
-        margin: 0px;
-        text-align: left;
-    }
+   
 }
