@@ -11,21 +11,30 @@
     <body>
         <div class="flex-container">
             <div class="navbar">
-                <a href="">Sign up</a>
-                <a href="">Sign in</a>
+                <div class="signupLinks">
+                    <ul class="menu">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Features</a></li>
+                        <li><a href="">Blog</a></li>
+                    </ul>
+                    <ul class="signupmenu">                        
+                        <li><a href="">Sign up</a></li>
+                        <li><a href="">Sign in</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="home">
-                <div>
+            <div class="flex-container2">
+                <div class="introduction">
                     <h1>StackOverflow-Lite</h1>
                     <p>A platform where people can ask questions and provide answers.</p>
                 </div>
-                <div>
-                    <form>
+                <div class="signupForm">
+                    <form  id="formFields">
                         <label for="username">Username</label>
-                        <input type="text" placeholder="username">
+                        <input type="text" placeholder="Username">
                         <label for="username">Email</label>
-                        <input type="email" placeholder="email">
-                        <label for="password">Username</label>
+                        <input type="email" placeholder="Email">
+                        <label for="password">Password</label>
                         <input type="password" placeholder="Password">
                         <button type="submit">Sign Up</button>
                         <p>
@@ -33,6 +42,7 @@
                         </p>
                     </form>
                 </div>
+                
             </div>
         </div>
     </body>
