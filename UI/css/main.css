@@ -1,9 +1,11 @@
 body{
     background: rgba(0, 0, 0, 0.9);    
+    width: 100%;
 }
 .flex-container{
     display: flex;
     flex-direction: column;    
+    width: inherit;
 }
 .navbar{
     background-color: rgba(0, 0, 0);
@@ -59,10 +61,36 @@ body{
 }
 .signupmenu li, .menu li{
     display: inline;
-    margin: 10px;
+    margin-right: 10px;
 }
 .signupForm button{
     font-size: 18px;
     background-color:#26D357; 
     color: white;
+}
+@media screen and (max-width: 600px){
+    .flex-container{
+        width: 100%;
+    }
+    .flex-container2{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .signupForm, .introduction{
+        width: 95%;
+        margin: auto;
+    }
+    .signupLinks{
+        width: 100%;
+        margin-left: 0px;
+    }    
+    .navbar {
+        width: 100%;
+    }
+    .signupmenu li, .menu li{
+        display: inline;
+        margin: 0px;
+        text-align: left;
+    }
 }
