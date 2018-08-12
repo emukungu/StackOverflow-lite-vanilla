@@ -88,7 +88,11 @@ body{
 #post{
     font-size: 20px;
     margin-top: -1px;
-}
+    width: 30%;    
+} 
+#post a{
+    text-decoration-line: none;
+}   
 .col-3{
     border: 1px solid grey;
 }
