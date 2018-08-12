@@ -87,7 +87,47 @@ body{
         flex-wrap: wrap;
     }    
     .navbar {
-        height: 5%;        
+        height: 5%;
+        margin-bottom: 0px;        
+    }
+    .modal{        
+        width: 100%;        
     }
    
+}
+.close{
+    float: right;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.close:focus, .close:hover{
+    cursor: pointer;
+}
+.modal{
+    display: none;
+    width: 60%;
+    margin: auto;
+    margin-top: 200px;
+    position: fixed;
+    top: 0px;
+    left: 35%;
+    z-index: 1;
+    
+}
+.modal-header{
+    background-color: white;
+    color: black;
+    line-height: 60px;
+    padding-top: 3px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: -32px;
+    
+}
+.modal-content{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
