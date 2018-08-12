@@ -3,6 +3,7 @@ window.onload = function(){
     var postForm = document.getElementById("postForm");
     var container = document.getElementsByClassName("flex-container2")[0];
     var close = document.getElementsByClassName("close")[0];
+    var home = document.getElementsByClassName("home");
 
     post.onclick = function(){
         container.style.opacity= "0.1";
@@ -11,6 +12,10 @@ window.onload = function(){
     close.onclick = function(){
         container.style.opacity= "1";
         postForm.style.display="none";
+    }
+
+    home.onclick = function(){
+        window.location = 'questionDetails.html';
     }
 }
 

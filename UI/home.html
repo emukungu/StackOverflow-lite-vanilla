@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Profile</title>
+    <title>Home</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/userProfile.css">
 </head>
@@ -25,59 +25,27 @@
         </div>
         <div class="flex-container2">
             <div class="col-1">
-                <div id="userAvatar"><img src="./img/may.jpg" alt=""></div>
                 <div>
-                    <p>Username : esther</p>
-                    <button>Edit Profile</button>
+                    <h2>USER ACCOUNT</h2>
+                    <a href="userProfile.html" id="useraccount">Username : esther</a>
+                    <p>Activity</p>
                 </div>
             </div>
             <div class="col-2">
                 <div id="title">
-                    <div class="count">
-                        <div><label for="qnsasked">Questions Asked</label><button type="button" class="qns">10</button></div>
-                        <div><label for="answersgiven">Answers Given</label><button type="button" class="qns">20</button></div>
-                    </div>
-                    <h1>User Questions</h1>
+                    <h1>ALL QUESTIONS</h1>
                     <button type="button" id="post"><a href="#" target="#">Post A Question</a></button>
                 </div>
-                <div class="body">
-                    <ul>
-                        <li>
-                            <a href="">APIs</a>
-                            <label for="qnsasked">Answers Given</label><button>10</button>
-
-                        </li>
-                        <li>
-                            <a href="">TDD</a>
-                            <label for="qnsasked">Answers Given</label><button>8</button>
-
-                        </li>
-                        <li>
-                            <a href="">OOP</a>
-                            <label for="qnsasked">Answers Given</label><button>6</button>
-
-                        </li>
-                        <li>
-                            <a href="">Github</a>
-                            <label for="qnsasked">Answers Given</label><button>2</button>
-
-                        </li>
-                        <li>
-                            <a href="">Pivotal tracker</a>
-                            <label for="qnsasked">Answers Given</label><button>7</button>
-
-                        </li>
-                    </ul>
+                <div class="body home">
+                    <table>
+                        <tr><td><h2>Title</h2></td><td><h2>Posted by:</h2></td><td><h2>Date</h2></td></tr>
+                        <tr><td><a href="">APIs</a></td><td>Esther</td><td>2018-02-13</td></tr>
+                        <tr><td><a href="">TDD</a></td><td>Becky</td><td>2018-02-16</td></tr>
+                        <tr><td><a href="">OOP</a></td><td>Michael</td><td>2018-02-20</td></tr>
+                        <tr><td><a href="">Github</a></td><td>Danny</td><td>2018-04-13</td></tr>
+                        <tr><td><a href="">Pivotal Tracker</a></td><td>Ricky</td><td>2018-05-13</td></tr>     
+                    </table>                     
                 </div>
-            </div>
-            <div class="col-3">
-                <h2>Recently Asked Questions</h2>
-                <ul>
-                    <li>Javascript Syntax?</li>
-                    <li>Javascript Variables</li>
-                    <li>Python OOP</li>
-                    <li>Test Driven Development</li>
-                </ul>    
             </div>
         </div>
     </div>
@@ -98,7 +66,7 @@
     </div>
     <div class="footer">
         <div class="navbar">
-           <p>Copyright 2018</p>
+            <p>Copyright 2018</p>
         </div>
     </div>
     <script src="js/profile.js"></script>

@@ -138,3 +138,17 @@ body{
 
     }
 }
+/* *{
+    outline: 1px solid red;
+} */
+.home td{
+    width: 700px;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    height: 30px;
+}
+#useraccount{
+    font-size: 20px;
+    text-decoration-line: none;
+    color: blueviolet;
+}
