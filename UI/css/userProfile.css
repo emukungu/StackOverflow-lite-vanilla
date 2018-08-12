@@ -1,3 +1,6 @@
+/* * {
+    outline: 1px solid red;
+} */
 body{
     background-color: white;
 }
@@ -9,7 +12,7 @@ body{
     margin-bottom: 40px;
 }
 .flex-container2{
-    width: 90vw;
+    width: 90%;
     margin: auto;    
 }
 #title{    
@@ -33,13 +36,14 @@ body{
     padding-top: 20px;
 }
 .col-3, .col-1{
-    width: 300px;    
+    width: 150px;    
 }
 
 .col-2{
-    flex-grow: 2;
-    margin-left: 35px;
-    margin-right: 20px;
+    flex-grow: 1;
+    margin-left: 50px;
+    margin-right: 30px;
+    width: 300px;
 }
 .body li{
     border-bottom: 1px solid grey;
@@ -47,7 +51,7 @@ body{
     display: flex;
 }
 .body a{
-    width: 400px;
+    width: 700px;
     text-decoration-line: none;
     padding-top: 20px;
     margin-right: 20px;
@@ -74,9 +78,12 @@ body{
     margin-left: 5px;
 }
 #userAvatar{
-    height: 3vh;
-    width: 200px;
-    margin-bottom: 200px;
+    height: 30%;
+    width: 150px;
+    margin-bottom: 10px;
+}
+#userAvatar img{
+    width: 150px;
 }
 #post{
     font-size: 20px;
@@ -108,9 +115,22 @@ body{
     margin: 20px;
 }
 @media screen and (max-width: 600px){
+    /* * {
+        outline: 1px solid red;
+    } */
     .col-2{
         margin-left: 0px;
         margin-bottom: 20px;
     }
     
+}
+.modal-content, .modal-header{
+    background-color: lightgrey;
+}
+@media screen and (max-width:600px){
+    #postForm{        
+        position: fixed;
+        top: 1px;   
+
+    }
 }

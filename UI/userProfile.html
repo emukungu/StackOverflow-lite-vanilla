@@ -37,7 +37,7 @@
                         <div><label for="qnsasked">Questions Asked</label><button type="button" class="qns">10</button></div>
                         <div><label for="answersgiven">Answers Given</label><button type="button" class="qns">20</button></div>
                     </div>
-                    <button type="button" id="post"><a href="">Post A Question</a></button>
+                    <button type="button" id="post"><a href="#" target="#">Post A Question</a></button>
                 </div>
                 <div class="body">
                     <ul>
@@ -76,15 +76,30 @@
                     <li>Javascript Variables</li>
                     <li>Python OOP</li>
                     <li>Test Driven Development</li>
-                </ul>
-    
+                </ul>    
             </div>
+        </div>
+    </div>
+    <div class="modal" id="postForm">
+        <div class="introduction modal-header">
+            <span class="close">&times;</span>
+            <h1>Post a Question</h1>
+        </div>
+        <div class="signupForm modal-content">                
+            <form  id="formFields">
+                <label for="title">Title</label>
+                <input type="text" placeholder="Title">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>            
         </div>
         <div class="footer">
             <div class="navbar">
                 <p>Copyright 2018</p>
             </div>
         </div>
-    </div>
+    <script src="js/profile.js"></script>
 </body>
 </html>
