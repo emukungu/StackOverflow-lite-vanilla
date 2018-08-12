@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Details</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/userProfile.css">
+</head>
+<body>
+    <div class="flex-profile-container">
+        <div class="navbar">
+            <div class="signupLinks">
+                <ul class="menu">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="">Features</a></li>
+                    <li><a href="">Blog</a></li>
+                </ul>
+                <ul class="signupmenu">                        
+                    <li><a href="">Sign up</a></li>
+                    <li><a href="">Sign in</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex-container2">
+            <div class="col-1">
+                <div>
+                    <h2>USER ACCOUNT</h2>
+                    <a href="userProfile.html" id="useraccount">Username : esther</a>
+                    <p>Activity</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div id="title">
+                    <!-- <h1>ALL QUESTIONS</h1> -->
+                    <button type="button" id="post"><a href="#" target="#">Post A Question</a></button>
+                </div>
+                <div class="body home details">
+                    <div id="question">
+                        <h2>TDD</h2>
+                        <p id="describe">
+                            I am new to the concept of TDD. This is my first program in which I use TDD.
+                            Can someone simplify what TDD means exactly?
+                        </p>
+                    </div>
+                    <div class="answers">
+                        <table>
+                            <tr><td class="td1"><h3>ANSWERS</h3></td><td><h3>POSTED BY:</h3></td></tr>
+                            <tr><td class="td1">Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only.
+                                    This is opposed to software development that allows software to be added that is not proven to meet requirements. </td><td>Becky</td></tr>
+                            <tr><td class="td1">Test-driven development is related to the test-first programming concepts of extreme programming, begun in 1999,
+                                                 but more recently has created more general interest in its own right</td><td>Ricky</td></tr>
+                            <tr><td class="td1">Test-driven development is related to, but different from acceptance test–driven development (ATDD).TDD is primarily a developer's tool to help create well-written unit of code (function, class, or module) that correctly performs a set of operations.</td><td>Becky</td></tr>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div id="comment">
+            <div class="introduction modal-header">            
+                <h3>YOUR ANSWER</h3>
+            </div>
+            <div class="signupForm modal-content">                
+                <form  id="formFields">
+                    <!-- <label for="title">Title</label>
+                    <input type="text" placeholder="Title"> -->
+                    <!-- <label for="description">Description</label> -->
+                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                    <button type="submit">POST</button>
+                </form>
+            </div>            
+        </div>
+    </div>
+    <div class="footer">
+        <div class="navbar">
+            <p>Copyright 2018</p>
+        </div>
+    </div>
+    <!-- <script src="js/profile.js"></script> -->
+</body>
+</html>

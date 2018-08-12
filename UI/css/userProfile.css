@@ -151,4 +151,28 @@ body{
     font-size: 20px;
     text-decoration-line: none;
     color: blueviolet;
+    margin-bottom: 30px;
+}
+.td1{
+    text-align: left;
+}
+#comment .modal-header, #comment .modal-content{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom: 1px solid grey;
+    background-color: white;
+    width:60%;  
+}
+#comment{
+    margin-left: 30%;  
+    margin-bottom: 50px; 
+}
+#comment button{
+    background-color: skyblue;
+}
+@media screen and (max-width:600px){
+    #comment{
+        width: 100%;
+        margin-left: 0px;
+    }
 }
