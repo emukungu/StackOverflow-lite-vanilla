@@ -26,7 +26,7 @@ Clone repository from link below
 * Javascript
 
 ### Demo
-https://emukungu.github.io/StackOverflow-lite/UI/
+https://emukungu.github.io/StackOverflow-lite/
 
 ### License
 MIT License
