@@ -12,8 +12,8 @@ The different static pages include:
 
 ## Usage
 Clone repository from link below
-*git clone `https://github.com/emukungu/StackOverflow-lite.git`
-*open the browser pages to view them on your local machine.
+* git clone `https://github.com/emukungu/StackOverflow-lite.git`
+* open the browser pages to view them on your local machine.
 
 ## Setup/Installation Requirements
 * vscode
