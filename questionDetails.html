@@ -18,7 +18,7 @@
                     <li><a href="">Blog</a></li>
                 </ul>
                 <ul class="signupmenu">                        
-                    <li><a href="">Sign up</a></li>
+                    <li><a href="index.html">Sign up</a></li>
                     <li><a href="">Sign in</a></li>
                 </ul>
             </div>
@@ -27,14 +27,14 @@
             <div class="col-1">
                 <div>
                     <h2>USER ACCOUNT</h2>
-                    <a href="userProfile.html" id="useraccount">Username : esther</a>
+                    <a href="userProfile.html" id="useraccount">esther</a>
                     <p>Activity</p>
                 </div>
             </div>
             <div class="col-2">
                 <div id="title">
                     <!-- <h1>ALL QUESTIONS</h1> -->
-                    <button type="button" id="post"><a href="#" target="#">Post A Question</a></button>
+                    <button type="submit" id="post">Post A Question</button>
                 </div>
                 <div class="body home details">
                     <div id="question">
@@ -72,11 +72,26 @@
             </div>            
         </div>
     </div>
+    <div class="modal" id="postForm">
+        <div class="introduction modal-header">
+            <span class="close">&times;</span>
+            <h1>Post a Question</h1>
+        </div>
+        <div class="signupForm modal-content">                
+            <form  id="formFields">
+                <label for="title">Title</label>
+                <input type="text" placeholder="Title">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>            
+    </div>
     <div class="footer">
         <div class="navbar">
             <p>Copyright 2018</p>
         </div>
     </div>
-    <!-- <script src="js/profile.js"></script> -->
+    <script src="js/profile.js"></script>
 </body>
 </html>
