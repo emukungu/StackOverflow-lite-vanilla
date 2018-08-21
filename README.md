@@ -7,7 +7,7 @@ The different static pages include:
 * Sign up and Sign in forms
 * User profile page
 * Home page for the application
-* Activity page.
+* A page with the details for each question.
 
 
 ## Usage
