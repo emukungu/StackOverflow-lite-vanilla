@@ -40,7 +40,8 @@ body{
     line-height: 40px;
     margin-bottom: 20px;
     margin-top: 10px;
-    border-radius: 2px;
+    padding-left: 10px;
+    outline: 0px;
 }
 .introduction{
     color: white;
@@ -110,6 +111,7 @@ body{
     top: 0px;
     left: 35%;
     z-index: 1;
+    
     
 }
 .modal-header{
