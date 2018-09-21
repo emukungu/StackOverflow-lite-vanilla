@@ -52,8 +52,6 @@ body{
 #formFields{
     display: flex;
     flex-direction: column;
-}
-#formFields{
     margin: 30px;
 }
 .menu{
