@@ -68,7 +68,7 @@ body{
    margin-right: 5px;
 }
 .count{
-    float: left;
+    /* float: left; */
     display: flex;
     margin-top: 10px;
 }
@@ -118,6 +118,10 @@ body{
 .col-3 li{
     margin: 20px;
 }
+#delete{
+    float: right;
+    margin-right: 0px;
+}
 @media screen and (max-width: 600px){
     /* * {
         outline: 1px solid red;
@@ -131,6 +135,7 @@ body{
 .modal-content, .modal-header{
     background-color: lightgrey;
 }
+
 @media screen and (max-width:600px){
     #postForm{        
         position: fixed;

@@ -35,6 +35,7 @@ const login = (login_data)=>{
 
 
 let signupHandler = (form)=>{
+     // This function retrieves the user input data for signing up a user
     let usernameSignup = form.usernameSignup.value
     let emailSignup = form.emailSignup.value
     let passwordSignup = form.passwordSignup.value
@@ -43,22 +44,16 @@ let signupHandler = (form)=>{
                     email: emailSignup,
                     password: passwordSignup}
     signup(signup_data)
-    
-    usernameSignup.innerHTML = ""
-    emailSignup.innerHTML = ""
-    passwordSignup.innerHTML = ""
-    }
+}
 
 let loginHandler = (form)=>{
+     // This function retrieves the user input data for loging in a user
     let usernameLogin = form.usernameLogin.value
     let passwordLogin = form.passwordLogin.value
     let login_data = {username: usernameLogin,
         password: passwordLogin}
 
     login(login_data)
-
-    usernameLogin.innerHTML = ""
-    passwordLogin.innerHTML = ""
 }
 
 
