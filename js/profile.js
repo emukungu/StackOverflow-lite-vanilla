@@ -10,15 +10,15 @@ let tableDisplaysPostedQns = (data) =>{
     allquestionsTable.appendChild(row) 
 }
 
-let tableDisplaysAllUserQns = data =>{
-    // The function displays all questions in a table
-    let allUserQuestionsTable = document.querySelector(".user_qns ul")
-    let listed = document.createElement("li")
-    listed.innerHTML = `<input type="checkbox" class="check">
-                      <a href="#">${data.title}</a>
-                      <label>Answers Given</label><button>0</button>`
-    allUserquestionsTable.appendChild(list)      
-}
+// let tableDisplaysAllUserQns = data =>{
+//     // The function displays all questions in a table
+//     let allUserQuestionsTable = document.querySelector(".user_qns ul")
+//     let listed = document.createElement("li")
+//     listed.innerHTML = `<input type="checkbox" class="check">
+//                         <a href="#">${data.title}</a>
+//                         <label>Answers Given</label><button>0</button>`
+//     allUserquestionsTable.appendChild(list)      
+// }
 
 let tableDisplaysAllQns = data =>{
     // The function displays all questions in a table
@@ -37,12 +37,13 @@ let tableDisplaysSpecificqn =(data) =>{
 let tableDisplayQuestionAnswers = data =>{
     let answers = document.querySelector(".answers")
     let row = document.createElement("tr")
-    row.innerHTML = `<td class="td1">${data.answer} </td><td>${data.answered_user} </td>
+    row.innerHTML = `<td class="td1"><span class = "tip"></span>
+                     <a href="#" class = "answers">${data.answer}</a></td>
+                     <td>${data.answered_user} </td>
                      <td>
                         <div>
-                            <button type="button" id="upvote">UPVOTE</button>
-                            <button type="button" id="downvote">DOWNVOTE</button>
-                            <button type="button" class="edit_answers">EDIT</button>
+                            <button type="button">&#8593</button>
+                            <button type="button">&#8595</button>
                         </div>
                      </td>`
     answers.appendChild(row)
@@ -88,17 +89,7 @@ const getAllQuestions = ()=>{
                 let qnid = `${res[i].qn_id}`
                 getSpecificQuestion(qnid)                
             }) }
-            
-        let checkQns = document.querySelectorAll(".check")
-        let del = document.querySelector("#delete")
-        for(let i = 0; i<checkQns.length; i++){
-            checkQns[i].addEventListener("change", ()=>{
-                del.addEventListener("click", ()=>{
-                    let qnid = `${res[i].qn_id}`
-                    deleteqn(qnid)
-                })
-            })
-        } //get questions with most answers first then delete
+
         })
     .catch((error) => {return error})
 }
@@ -141,28 +132,28 @@ const deleteqn = (questionId)=>{
     })
     .then(response =>{return response.json()})
     .then(data =>{ let res = data.message
-        console.log(res)
+        alert(res)
     })
     .catch(error =>{return error})
 }
 
-const allQnsUserAsked = () =>{
-    fetch(url + `/user/questions`, {
-        method: "GET",
-        mode:"cors",
-        headers: {"Content-Type":"application/json",
-                "Authorization":"Bearer " + localStorage.getItem("token")}      
-    })
-    .then(respone => {return response.json()})
-    .then((data) => {
-        let res = data.Results 
-        localStorage.setItem("title", res.title)
-        res.forEach(element =>{
-            tableDisplaysAllUserQns(element)
-        })
-    })
-    .catch(error =>{return error})
-}
+// const allQnsUserAsked = () =>{
+//     fetch(url + `/user/questions`, {
+//         method: "GET",
+//         mode:"cors",
+//         headers: {"Content-Type":"application/json",
+//                 "Authorization":"Bearer " + localStorage.getItem("token")}      
+//     })
+//     .then(respone => {return response.json()})
+//     .then((data) => {
+//         let res = data.Results 
+
+//         res.forEach(element =>{
+//             tableDisplaysAllUserQns(element)
+//         })
+//     })
+//     .catch(error =>{return error})
+// }
 
 const answersPerQuestion = (questionId) =>{
     fetch(url + `/questions/${questionId}/answers`, {
@@ -177,9 +168,9 @@ const answersPerQuestion = (questionId) =>{
         })
 
         let updateForm = document.querySelector("#editForm #formFields")
-        let x = document.querySelectorAll(".edit_answers")// edit box on answers
+        let x = document.querySelectorAll(".td1 a")// edit box on answers
         for(let i = 0; i<x.length; i++){
-            x[i].addEventListener("click", ()=>{
+            x[i].addEventListener("dblclick", ()=>{
                 container.style.opacity= "0.1";
                 editForm.style.display="block";
                 comment.style.opacity= "0.1";
@@ -191,14 +182,31 @@ const answersPerQuestion = (questionId) =>{
                     editForm.style.display= "none";
                     })
                 })
-            }
 
+            x[i].addEventListener("click", ()=>{
+                console.log("pk")
+                
+            })
+            }
     })
     .catch(error => {return error})
 }
 
 const updateOrPreferredAnswer = (questionId, answerId, data) =>{
     fetch(url + `/questions/${questionId}/answers/${answerId}`, {
+        method: "PUT",
+        mode:"cors",
+        headers: {"Content-Type":"application/json",
+                "Authorization":"Bearer " + localStorage.getItem("token")},
+        body: JSON.stringify(data)                 
+    })
+    .then(respone => {return response.json()})
+    .then(data => {alert(data.message)})
+    .catch(error => {return error})
+}
+
+const upVotedownVote = (data) =>{
+    fetch(url + `/api/v1/answers/${answerId}`, {
         method: "PUT",
         mode:"cors",
         headers: {"Content-Type":"application/json",
@@ -248,9 +256,7 @@ window.onload = function(){
     
     let useraccount = document.querySelector("#useraccount")
     useraccount.addEventListener("click", ()=>{
-        localStorage.getItem("token")
-        window.location.href = "userProfile.html"
-        allQnsUserAsked()        
+        window.location.href = "userProfile.html"       
     })
 
     const title = localStorage.getItem("title")
@@ -271,4 +277,14 @@ window.onload = function(){
         postAnswerHandler(qn_id, postAnswerForm) 
     })
     
+    let del =  document.querySelector("#delete")
+        del.addEventListener("click", ()=>{
+            let qn = data.qn_id
+            deleteqn(qn)
+            let title = document.querySelector("#question h2")
+            title.innerHTML = ``
+            let description = document.querySelector("#describe")
+            description.innerHTML = ``
+            answersPerQuestion(qn)
+        })
 }

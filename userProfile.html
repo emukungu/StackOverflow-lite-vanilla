@@ -27,20 +27,19 @@
             <div class="col-1">
                 <div id="userAvatar"><img src="./img/profile-picture.jpg" alt=""></div>
                 <div>
-                    <p>esther</p>
+                    <p id="useraccount">esther</p>
                     <button>Edit Profile</button>
                 </div>
             </div>
             <div class="col-2">
                 <div id="title">
+                    <h1>User Questions</h1>
                     <div class="count">
                         <div><label for="qnsasked">Questions Asked</label><button type="button" class="qns">10</button></div>
                         <div><label for="answersgiven">Answers Given</label><button type="button" class="qns">20</button></div>
                     </div>
-                    <h1>User Questions<span><button type="button" id="delete" class="qns">DELETE</button></span></h1>
-                    <!-- <button type="button" id="post">Post Question</button> -->
                 </div>
-                <div class="user_qns">
+                <div id="user_qns">
                     <ul>
                         <li>
                             <input type="checkbox" class="check">
@@ -94,6 +93,42 @@
            <p>Copyright 2018</p>
         </div>
     </div>
+    <script>
+
+        let useraccount = document.querySelector("#useraccount")
+        useraccount.addEventListener("click", ()=>{
+            allQnsUserAsked()
+        })
+
+        let tableDisplaysAllUserQns = (data) =>{
+            // The function displays all questions in a table
+            let allUserQuestionsTable = document.querySelector("#user_qns ul")
+            let listed = document.createElement("li")
+            listed.innerHTML = `<input type="checkbox" class="check">
+                                <a href="#">${data.title}</a>
+                                <label>Answers Given</label><button>0</button>`
+            allUserQuestionsTable.appendChild(listed)      
+            }
+
+        const allQnsUserAsked = () =>{
+            fetch(`http://localhost:5000/api/v1/user/questions`, {
+            method: "GET",
+            mode:"cors",
+            headers: {"Content-Type":"application/json",
+                "Authorization":"Bearer " + localStorage.getItem("token")}      
+        })
+        .then(respone => {return response.json()})
+        .then((data) => {
+            let res = data.Results 
+            res.forEach((element) =>{
+                tableDisplaysAllUserQns(element)
+            })
+        })
+        .catch(error =>{return error})
+        }
+
+        // allQnsUserAsked()
+    </script>
     <script src="js/profile.js"></script>
 </body>
 </html>

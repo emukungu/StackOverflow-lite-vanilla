@@ -19,7 +19,7 @@ body{
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid grey;
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
 }
 .footer{
     position: fixed;
@@ -45,32 +45,32 @@ body{
     margin-right: 30px;
     width: 300px;
 }
-.user_qns li{
+#user_qns li{
     border-bottom: 1px solid grey;
     text-decoration-style: none;
     display: flex;
 }
-.user_qns a{
+#user_qns a{
     width: 650px;
     text-decoration-line: none;
     padding-top: 20px;
     margin-right: 20px;
 }
-.user_qns button, .count button{
+#user_qns button, .count button{
     border-radius: 10px;
     margin-top: 15px;
     line-height: 20px;
     float: right;
     background-color: lightgrey;
 }
-.user_qns label, .count label{
+#user_qns label, .count label{
    padding-top: 20px;
    margin-right: 5px;
 }
 .count{
     /* float: left; */
     display: flex;
-    margin-top: 10px;
+    margin-top: 35px;
 }
 .count .qns{
     margin-top: 0px;
@@ -82,10 +82,15 @@ body{
     width: 150px;
     margin-bottom: 10px;
 }
+#edit_answers{
+    float: right; 
+     margin-right: 0px;
+    width: 40px;
+}
 #userAvatar img{
     width: 150px;
 }
-#post{
+#post, #edit_answers{
     font-size: 20px;
     margin-top: -1px;
     width: 20%;    
