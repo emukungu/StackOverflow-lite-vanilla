@@ -45,25 +45,25 @@ body{
     margin-right: 30px;
     width: 300px;
 }
-.body li{
+.user_qns li{
     border-bottom: 1px solid grey;
     text-decoration-style: none;
     display: flex;
 }
-.body a{
-    width: 700px;
+.user_qns a{
+    width: 650px;
     text-decoration-line: none;
     padding-top: 20px;
     margin-right: 20px;
 }
-.body button, .count button{
+.user_qns button, .count button{
     border-radius: 10px;
     margin-top: 15px;
     line-height: 20px;
     float: right;
     background-color: lightgrey;
 }
-.body label, .count label{
+.user_qns label, .count label{
    padding-top: 20px;
    margin-right: 5px;
 }
@@ -121,6 +121,9 @@ body{
 #delete{
     float: right;
     margin-right: 0px;
+}
+#allquestionsTable a{
+    text-decoration-line: none;
 }
 @media screen and (max-width: 600px){
     /* * {
