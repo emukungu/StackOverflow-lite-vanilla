@@ -33,8 +33,8 @@
             </div>
             <div class="col-2">
                 <div id="title">
-                    <!-- <h1>ALL QUESTIONS</h1> -->
-                    <button type="button" id="post">Post Question</button>
+                    <h1>QUESTION</h1>
+                    <!-- <button type="button" id="post">Post Question</button> -->
                 </div>
                 <div class="body home details">
                     <div id="question">
@@ -47,14 +47,7 @@
                     </div>
                     <div class="answers">
                         <table>
-                            <tr><td class="td1"><h3>ANSWERS</h3></td><td><h3>POSTED BY:</h3></td></tr>
-                            <tr><td class="td1">Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only.
-                                    This is opposed to software development that allows software to be added that is not proven to meet requirements. </td><td>Becky</td>
-                                    <td><div><button type="button" id="delete">UPVOTE</button><button type="button" id="delete">DOWNVOTE</button></div></td></tr>
-                                    
-                            <tr><td class="td1">Test-driven development is related to, but different from acceptance test–driven development (ATDD).TDD is primarily a developer's tool to help create well-written unit of code (function, class, or module) that correctly performs a set of operations.</td><td>Becky</td>
-                                <td><div><button type="button" id="delete">UPVOTE</button><button type="button" id="delete">DOWNVOTE</button></div></td>
-                            </tr>
+                            <tr><td class="td1"><h3>ANSWERS</h3></td><td><h3>POSTED BY:</h3></td><td></td></tr>
                         </table>
                     </div> 
                 </div>
@@ -66,26 +59,21 @@
             </div>
             <div class="signupForm modal-content">                
                 <form  id="formFields">
-                    <!-- <label for="title">Title</label>
-                    <input type="text" placeholder="Title"> -->
-                    <!-- <label for="description">Description</label> -->
                     <textarea name="description" id="answer" cols="30" rows="10"></textarea>
                     <button type="submit">POST</button>
                 </form>
             </div>            
         </div>
     </div>
-    <div class="modal" id="postForm">
+    <div class="modal" id="editForm">
         <div class="introduction modal-header">
             <span class="close" id="closeHome">&times;</span>
-            <h1>Post a Question</h1>
+            <h1>Edit Answer</h1>
         </div>
         <div class="signupForm modal-content">                
             <form  id="formFields">
-                <label for="title">Title</label>
-                <input type="text" placeholder="Title">
-                <label for="description">Description</label>
-                <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                <label for="description">Update Answer</label>
+                <textarea name="description" id="edited_answer" cols="20" rows="5"></textarea>
                 <button type="submit">Submit</button>
             </form>
         </div>            
@@ -95,6 +83,19 @@
             <p>Copyright 2018</p>
         </div>
     </div>
+    <script>
+            var edit_ans = document.querySelectorAll(".edit_answers");    
+            var postForm = document.getElementById("postForm");
+            var container = document.getElementsByClassName("flex-container2")[0];
+            var closeHome = document.getElementById("closeHome");
+            var comment = document.getElementById("comment");   
+            
+            closeHome.addEventListener("click", function(){
+                container.style.opacity= "1";
+                editForm.style.display="none";
+                comment.style.opacity= "1";
+                }) 
+        </script>
     <script src="js/profile.js"></script>
 </body>
 </html>
