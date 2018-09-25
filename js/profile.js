@@ -281,10 +281,5 @@ window.onload = function(){
         del.addEventListener("click", ()=>{
             let qn = data.qn_id
             deleteqn(qn)
-            let title = document.querySelector("#question h2")
-            title.innerHTML = ``
-            let description = document.querySelector("#describe")
-            description.innerHTML = ``
-            answersPerQuestion(qn)
         })
 }
