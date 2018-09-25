@@ -1,7 +1,7 @@
 //BUSINESS LOGIC
 let url = 'http://localhost:5000/api/v1';
 
-const signup = (signup_data) =>{
+const signup = (signup_data, form) =>{
     /*Signup a user*/
     fetch(url + '/auth/signup',{
         method:"POST",
@@ -10,8 +10,20 @@ const signup = (signup_data) =>{
         body: JSON.stringify(signup_data)
     })
     .then((response) =>{
-            return response.json();} 
-    ).then(value =>{alert(value.message)})
+        if(response.status == 201){
+            return response.json();
+        }
+        else if(response.status == 400){
+            alert("Fill in the missing fields")
+        }
+        else if(response.status == 403){
+            alert("Please sign in instead!")
+        }
+    } 
+    ).then(value =>{
+        alert(value.message)
+        signuploginHandler(form)
+    })
     .catch((error)=>{
         return error
     })}
@@ -24,7 +36,17 @@ const login = (login_data)=>{
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(login_data)
     })
-    .then((response) =>{return response.json();})
+    .then((response) =>{
+        if(response.status == 200){
+            return response.json();
+        }
+        else if(response.status == 400){
+            alert("Fill in the missing fields")
+        }
+        else if(response.status == 405){
+            alert("User doesnot exist on this platform")
+        }
+    })
     .then((data) => {
         localStorage.setItem("token", data.token)
         console.log(data.token)
@@ -43,7 +65,8 @@ let signupHandler = (form)=>{
     let signup_data = {username: usernameSignup,
                     email: emailSignup,
                     password: passwordSignup}
-    signup(signup_data)
+    signup(signup_data, form)
+
 }
 
 let loginHandler = (form)=>{
@@ -54,6 +77,16 @@ let loginHandler = (form)=>{
         password: passwordLogin}
 
     login(login_data)
+}
+
+let signuploginHandler = (form)=>{
+    // This function attaches a token to a signuped up user
+    let usernameSignup = form.usernameSignup.value
+    let passwordSignup = form.passwordSignup.value
+    let login_data = {username: usernameSignup,
+       password: passwordSignup}
+
+   login(login_data)
 }
 
 
