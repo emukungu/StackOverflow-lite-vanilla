@@ -42,19 +42,16 @@
                 <div id="user_qns">
                     <ul>
                         <li>
-                            <input type="checkbox" class="check">
                             <a href="#">APIs</a>
                             <label for="qnsasked">Answers Given</label><button>10</button>
 
                         </li>
                         <li>
-                            <input type="checkbox" class="check">
                             <a href="questionDetails.html">TDD</a>
                             <label for="qnsasked">Answers Given</label><button>8</button>
 
                         </li>
                         <li>
-                            <input type="checkbox" class="check">
                             <a href="questionDetails.html">OOP</a>
                             <label for="qnsasked">Answers Given</label><button>6</button>
 
@@ -94,21 +91,13 @@
         </div>
     </div>
     <script>
-
-        let useraccount = document.querySelector("#useraccount")
-        useraccount.addEventListener("click", ()=>{
-            allQnsUserAsked()
-        })
-
         let tableDisplaysAllUserQns = (data) =>{
             // The function displays all questions in a table
             let allUserQuestionsTable = document.querySelector("#user_qns ul")
             let listed = document.createElement("li")
-            listed.innerHTML = `<input type="checkbox" class="check">
-                                <a href="#">${data.title}</a>
-                                <label>Answers Given</label><button>0</button>`
+            listed.innerHTML = `<a href="#">${data.title}</a><label>Answers Given</label><button>0</button>`
             allUserQuestionsTable.appendChild(listed)      
-            }
+        }
 
         const allQnsUserAsked = () =>{
             fetch(`http://localhost:5000/api/v1/user/questions`, {
@@ -120,6 +109,7 @@
         .then(respone => {return response.json()})
         .then((data) => {
             let res = data.Results 
+            console.log(data.message)
             res.forEach((element) =>{
                 tableDisplaysAllUserQns(element)
             })
@@ -127,8 +117,7 @@
         .catch(error =>{return error})
         }
 
-        // allQnsUserAsked()
+        allQnsUserAsked()
     </script>
-    <script src="js/profile.js"></script>
 </body>
 </html>
