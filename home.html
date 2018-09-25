@@ -27,7 +27,7 @@
             <div class="col-1">
                 <div>
                     <h2>USER ACCOUNT</h2>
-                    <a href="userProfile.html" id="useraccount">esther</a>
+                    <a href="#" id="useraccount">esther</a>
                     <p>Activity</p>
                 </div>
             </div>
@@ -64,6 +64,30 @@
             <p>Copyright 2018</p>
         </div>
     </div>
+    <script>
+        var post = document.getElementById("post");    
+        var postForm = document.getElementById("postForm");
+        var container = document.getElementsByClassName("flex-container2")[0];
+        var closeHome = document.getElementById("closeHome");
+
+        post.addEventListener("click", function(){
+        container.style.opacity= "0.1";
+        postForm.style.display="block";
+        })
+
+        closeHome.addEventListener("click", function(){
+        container.style.opacity= "1";
+        postForm.style.display="none";
+        })
+
+        const postQuestionForm = document.querySelector("#postForm #formFields")
+        postQuestionForm.addEventListener("submit", (event)=>{
+        event.preventDefault()
+        postQuestionHandler(postQuestionForm)
+        let postForm = document.querySelector("#postForm")
+        postForm.style.display= "none";
+    })
+    </script>
     <script src="js/profile.js"></script>
 </body>
 </html>
