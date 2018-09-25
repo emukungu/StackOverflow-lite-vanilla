@@ -71,11 +71,11 @@
     <div class="modal" id="editForm">
         <div class="introduction modal-header">
             <span class="close" id="closeHome">&times;</span>
-            <h1>Edit Answer</h1>
+            <h1>Update Answer</h1>
         </div>
         <div class="signupForm modal-content">                
             <form  id="formFields">
-                <label for="description">Update Answer</label>
+                <label for="description"></label>
                 <textarea name="description" id="edited_answer" cols="20" rows="5"></textarea>
                 <button type="submit">Submit</button>
             </form>
@@ -91,7 +91,7 @@
             var postForm = document.getElementById("postForm");
             var container = document.getElementsByClassName("flex-container2")[0];
             var closeHome = document.getElementById("closeHome");
-            var comment = document.getElementById("comment");   
+            var commentForm = document.getElementById("comment");   
             
             closeHome.addEventListener("click", function(){
                 container.style.opacity= "1";
