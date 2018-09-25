@@ -36,36 +36,28 @@
                     <div class="count">
                         <div><label for="qnsasked">Questions Asked</label><button type="button" class="qns">10</button></div>
                         <div><label for="answersgiven">Answers Given</label><button type="button" class="qns">20</button></div>
-                        <div><button type="button" id="delete">EDIT</button><button type="button" id="delete">DELETE</button></div>
                     </div>
-                    <h1>User Questions</h1>
-                    <button type="button" id="post">Post Question</button>
+                    <h1>User Questions<span><button type="button" id="delete" class="qns">DELETE</button></span></h1>
+                    <!-- <button type="button" id="post">Post Question</button> -->
                 </div>
-                <div class="body">
+                <div class="user_qns">
                     <ul>
                         <li>
-                            <a href="questionDetails.html">APIs</a>
+                            <input type="checkbox" class="check">
+                            <a href="#">APIs</a>
                             <label for="qnsasked">Answers Given</label><button>10</button>
 
                         </li>
                         <li>
+                            <input type="checkbox" class="check">
                             <a href="questionDetails.html">TDD</a>
                             <label for="qnsasked">Answers Given</label><button>8</button>
 
                         </li>
                         <li>
+                            <input type="checkbox" class="check">
                             <a href="questionDetails.html">OOP</a>
                             <label for="qnsasked">Answers Given</label><button>6</button>
-
-                        </li>
-                        <li>
-                            <a href="questionDetails.html">Github</a>
-                            <label for="qnsasked">Answers Given</label><button>2</button>
-
-                        </li>
-                        <li>
-                            <a href="questionDetails.html">Pivotal tracker</a>
-                            <label for="qnsasked">Answers Given</label><button>7</button>
 
                         </li>
                     </ul>
@@ -85,7 +77,7 @@
     <div class="modal" id="postForm">
         <div class="introduction modal-header">
             <span class="close" id="closeHome">&times;</span>
-            <h1>Post a Question</h1>
+            <h1>Post Question</h1>
         </div>
         <div class="signupForm modal-content">                
             <form  id="formFields">
