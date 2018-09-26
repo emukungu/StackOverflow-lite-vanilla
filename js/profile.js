@@ -206,6 +206,9 @@ const answersPerQuestion = (questionId) =>{
     .then(data =>{let res = data.Results
         res.forEach(element =>{
             tableDisplayQuestionAnswers(element)
+            // element.forEach(comment =>{
+                commentsPerAnswer(element.ans_id)
+            // })
         })
 
         let updateForm = document.querySelector("#editForm #formFields")
@@ -247,8 +250,6 @@ const answersPerQuestion = (questionId) =>{
                     })  
             })
         }
-        let ansComment = `${res[i].ans_id}`
-        commentsPerAnswer(ansComment)
     })
     .catch(error => {return error})
 }
@@ -261,10 +262,10 @@ const updateOrPreferredAnswer = (questionId, answerId, data) =>{
                 "Authorization":"Bearer " + localStorage.getItem("token")},
         body: JSON.stringify(data)                 
     })
-    .then(respone => {return response.json()})
+    .then(response => {return response.json()})
     .then((res) => {
         alert(res.message) 
-        window.location.href ="questionDetails.html"       
+        window.location.reload()       
     })        
     .catch(error => {return error})
 }
@@ -311,7 +312,7 @@ const comments = (answerId, data)=>{
     })
     .then((res) => {
         alert(res.Successful) 
-        // window.location.reload()
+        window.location.reload()
     })
     .catch(error => {return error})
 }

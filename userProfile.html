@@ -41,21 +41,6 @@
                 </div>
                 <div id="user_qns">
                     <ul id="ul_qns">
-                        <li>
-                            <a href="#">APIs</a>
-                            <label for="qnsasked">Answers Given</label><button>10</button>
-
-                        </li>
-                        <li>
-                            <a href="questionDetails.html">TDD</a>
-                            <label for="qnsasked">Answers Given</label><button>8</button>
-
-                        </li>
-                        <li>
-                            <a href="questionDetails.html">OOP</a>
-                            <label for="qnsasked">Answers Given</label><button>6</button>
-
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -106,7 +91,7 @@
             headers: {"Content-Type":"application/json",
                 "Authorization":"Bearer " + localStorage.getItem("token")}      
         })
-        .then(respone => {return response.json()})
+        .then(response => {return response.json()})
         .then((data) => {
             let res = data.Results 
             console.log(data.message)
