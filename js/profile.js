@@ -27,9 +27,9 @@ let tableDisplaysSpecificqn =(data) =>{
 let tableDisplayQuestionAnswers = data =>{
     let answers = document.querySelector(".answers")
     let row = document.createElement("tr")
-    row.innerHTML = `<td class="td1"><span class = "tip"></span>
+    row.innerHTML = `<td class="td1">
                         <a href="#" class = "answers">${data.answer}</a>
-                        <p></p>
+                        <div class="commentsperAnswer"></div>
                      </td>
                      <td>${data.answered_user} </td>
                      <td>
@@ -38,6 +38,12 @@ let tableDisplayQuestionAnswers = data =>{
                             <button type="button">&#8595</button></div><a href="#" class="comment">Add Comment</a>
                      </td>`
     answers.appendChild(row)
+}
+let displayComments = (data) =>{
+    let parent = document.querySelector(".commentsPerAnswer")
+    let child = document.createElement("p")
+    child.innerHTML = `${data.comment}`  
+    parent.appendChild(child)  
 }
 
 
@@ -51,7 +57,23 @@ const postQuestion = (data) =>{
                 "Authorization":"Bearer " + localStorage.getItem("token")},
         body: JSON.stringify(data)
     })
-    .then((response) =>{return response.json()})
+    .then((response) =>{
+        if(response.status == 201){
+            return response.json();
+        }
+        else if(response.status == 400){
+            alert("Fill in the missing fields")
+            window.location.reload()
+        }
+        else if(response.status == 409){
+            alert("Question already exists")
+            window.location.reload()
+        }
+        else if(response.status == 401){
+            alert("You have no access priviledges")
+            window.location.reload()
+        }
+    })
     .then((data) => {
         let res= data.Results
         tableDisplaysPostedQns(res)
@@ -68,7 +90,15 @@ const getAllQuestions = ()=>{
         mode:'cors',
         headers:{"Content-Type":"application/json"}
     } )
-    .then((response) => {return response.json()})
+    .then((response) => {
+        if(response.status == 200){
+            return response.json();
+        }
+        else if(response.status == 404){
+            alert("No questions exist")
+            window.location.reload()
+        }
+    })
     .then((data) => {
         let res = data.Results 
         res.forEach(element =>{
@@ -88,7 +118,19 @@ const getAllQuestions = ()=>{
 const getSpecificQuestion = (questionId) => {
     // This function retrieves a specific question details and answers
     fetch(url + `/questions/${questionId}`)
-    .then((response) => {return response.json()})
+    .then((response) => {
+        if(response.status == 200){
+            return response.json();
+        }
+        else if(response.status == 404){
+            alert("The question doesnot exist on this platform")
+            window.location.reload()
+        }
+        else if(response.status == 405){
+            alert("Enter the correct URL")
+            window.location.reload()
+        }
+    })
     .then((data) => {
         localStorage.setItem("title", data.Question.title)
         localStorage.setItem("desc", data.Question.description)
@@ -107,11 +149,27 @@ const postAnswer = (questionId, data) =>{
                 "Authorization":"Bearer " + localStorage.getItem("token")},
         body: JSON.stringify(data)
     })
-    .then((response) =>{return response.json();})
+    .then((response) =>{
+        if(response.status == 201){
+            return response.json();
+        }
+        else if(response.status == 400){
+            alert("Fill in the missing fields")
+            window.location.reload()
+        }
+        else if(response.status == 409){
+            alert("Answer already exists")
+            window.location.reload()
+        }
+        else if(response.status == 401){
+            alert("You have no access priviledges")
+            window.location.reload()
+        }
+    })
     .then((res) => {
-        let data= res.Results
         alert(res.message) 
-        window.location.reload()})
+        window.location.reload()
+    })
     .catch((error) => {return error})  
 }
 const deleteqn = (questionId)=>{
@@ -121,9 +179,19 @@ const deleteqn = (questionId)=>{
         headers: {"Content-Type":"application/json",
                 "Authorization":"Bearer " + localStorage.getItem("token")}      
     })
-    .then(response =>{return response.json()})
-    .then(data =>{ let res = data.message
-        alert(res)
+    .then(response =>{
+        if(response.status == 204){
+            alert("Question has been deleted")
+            window.location.href = "home.html";
+        }
+        else if(response.status == 401){
+            alert("You have no access priviledges")
+            window.location.reload()
+        }
+        else if(response.status == 405){
+            alert("Question does not exist OR check  if this is the question you posted.")
+            window.location.href = "home.html"
+        }
     })
     .catch(error =>{return error})
 }
@@ -141,7 +209,7 @@ const answersPerQuestion = (questionId) =>{
         })
 
         let updateForm = document.querySelector("#editForm #formFields")
-        let x = document.querySelectorAll(".td1 a")// edit box on answers
+        let x = document.querySelectorAll(".td1 a")
         for(let i = 0; i<x.length; i++){
             x[i].addEventListener("click", ()=>{
                 container.style.opacity= "0.1";
@@ -153,6 +221,9 @@ const answersPerQuestion = (questionId) =>{
                     event.preventDefault()
                     updateAnswerHandler(questionId, ansId, updateForm)
                     editForm.style.display= "none";
+                    container.style.opacity= "1";
+                    commentForm.style.opacity= "1";
+                    
                     })
                 })
             }
@@ -170,9 +241,14 @@ const answersPerQuestion = (questionId) =>{
                     event.preventDefault()
                     postCommentHandler(ansIdcomment, updateForm)
                     editForm.style.display= "none";
+                    container.style.opacity= "1";
+                    commentForm.style.opacity= "1";
+                    
                     })  
             })
         }
+        let ansComment = `${res[i].ans_id}`
+        commentsPerAnswer(ansComment)
     })
     .catch(error => {return error})
 }
@@ -186,7 +262,10 @@ const updateOrPreferredAnswer = (questionId, answerId, data) =>{
         body: JSON.stringify(data)                 
     })
     .then(respone => {return response.json()})
-    .then(data => {alert(data.message)})
+    .then((res) => {
+        alert(res.message) 
+        window.location.href ="questionDetails.html"       
+    })        
     .catch(error => {return error})
 }
 
@@ -213,11 +292,42 @@ const comments = (answerId, data)=>{
                 "Authorization":"Bearer " + localStorage.getItem("token")},
         body: JSON.stringify(data)                 
     })
-    .then(respone => {return response.json()})
-    .then(data => { return data.message
-        // alert(data.message)
+    .then(response => {
+        if(response.status == 201){
+            return response.json();
+        }
+        else if(response.status == 400){
+            alert("Fill in the missing fields")
+            window.location.reload()
+        }
+        else if(response.status == 409){
+            alert("Comment already exists")
+            window.location.reload()
+        }
+        else if(response.status == 401){
+            alert("You have no access priviledges")
+            window.location.reload()
+        }
+    })
+    .then((res) => {
+        alert(res.Successful) 
+        // window.location.reload()
     })
     .catch(error => {return error})
+}
+
+const commentsPerAnswer = (answerId) =>{
+    fetch(url + `/answers/${answerId}/comment`, {
+        method: "GET",
+        mode:"cors",
+        headers: {"Content-Type":"application/json"}      
+    })
+    .then(res => {return res.json()})
+    .then(data =>{let res = data.Results
+        res.forEach(element =>{
+            displayComments(element)
+        })
+    }).catch(error =>{return error})
 }
 
 //USER DATA

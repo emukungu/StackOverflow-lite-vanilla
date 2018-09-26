@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div id="user_qns">
-                    <ul>
+                    <ul id="ul_qns">
                         <li>
                             <a href="#">APIs</a>
                             <label for="qnsasked">Answers Given</label><button>10</button>
@@ -93,9 +93,9 @@
     <script>
         let tableDisplaysAllUserQns = (data) =>{
             // The function displays all questions in a table
-            let allUserQuestionsTable = document.querySelector("#user_qns ul")
+            let allUserQuestionsTable = document.querySelector("#ul_qns")
             let listed = document.createElement("li")
-            listed.innerHTML = `<a href="#">${data.title}</a><label>Answers Given</label><button>0</button>`
+            listed.innerHTML = `<a href="#">${data.title}</a><label for="qnsasked">Answers Given</label><button>0</button>`
             allUserQuestionsTable.appendChild(listed)      
         }
 
@@ -112,11 +112,10 @@
             console.log(data.message)
             res.forEach((element) =>{
                 tableDisplaysAllUserQns(element)
+                })
             })
-        })
         .catch(error =>{return error})
         }
-
         allQnsUserAsked()
     </script>
 </body>
