@@ -79,8 +79,7 @@ const postQuestion = (data) =>{
     .then((data) => {
         let res= data.Results
         tableDisplaysPostedQns(res)
-        alert(data.Successful) 
-        window.location.reload()       
+        alert(data.Successful)        
     })
     .catch((error) => {return error})  
 }
