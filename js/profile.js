@@ -97,8 +97,7 @@ const getAllQuestions = ()=>{
             return response.json();
         }
         else if(response.status == 404){
-            alert("No questions exist")
-            
+            console.log("No questions exist")            
         }
     })
     .then((data) => {
