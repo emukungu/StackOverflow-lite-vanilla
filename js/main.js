@@ -47,9 +47,9 @@ const login = (login_data)=>{
             alert("User doesnot exist on this platform")
         }
     })
-    .then((data) => {
+    .then((res) => {let data = res.results
         localStorage.setItem("token", data.token)
-        console.log(data.token)
+        localStorage.setItem("username", data.username)
         window.location.replace("allQuestions.html")}
     )
     .catch((error) => {return error})

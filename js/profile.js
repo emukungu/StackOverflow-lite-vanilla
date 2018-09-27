@@ -387,15 +387,18 @@ let postCommentHandler = (answerId, form)=>{
 
 
 //USER LOGIC
-window.onload = function(){
+window.onload = function(){  
     
-    getAllQuestions()
-    
+    let username = localStorage.getItem("username")
     let useraccount = document.querySelector("#useraccount")
+    useraccount.innerHTML = username
+
+    getAllQuestions()
+
     useraccount.addEventListener("click", ()=>{
         window.location.href = "userProfile.html"       
     })
-
+    
     const title = localStorage.getItem("title")
     const desc = localStorage.getItem("desc")
     const qn_id = localStorage.getItem("qn")
@@ -419,4 +422,6 @@ window.onload = function(){
             let qn = data.qn_id
             deleteqn(qn)
         })
+
+    
 }
