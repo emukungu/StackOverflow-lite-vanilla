@@ -98,7 +98,7 @@ const getAllQuestions = ()=>{
         }
         else if(response.status == 404){
             alert("No questions exist")
-            window.location.reload()
+            
         }
     })
     .then((data) => {
