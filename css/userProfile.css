@@ -87,10 +87,10 @@ body{
     width: 150px;
     margin-bottom: 0px;
 }
-#edit_answers{
-    float: right; 
-     margin-right: 0px;
-    width: 40px;
+.commentsperAnswer{
+    /* float: right;  */
+    margin-top: 20px;
+    /* width: 40px; */
 }
 #userAvatar img{
     width: 150px;

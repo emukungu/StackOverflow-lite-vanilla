@@ -44,8 +44,10 @@ let displayComments = (data) =>{
     let ansComment = document.querySelectorAll(".commentsperAnswer")
     let child = document.createElement("OPTION")
     child.innerHTML = `${data.comment}` 
-    ansComment[i].appendChild(child)
-
+    for(let i = 0; i<ansComment.length; i++){
+        ansComment[i].appendChild(child)
+    }
+    
 }
 
 
@@ -206,7 +208,7 @@ const answersPerQuestion = (questionId) =>{
     .then(data =>{let res = data.Results
         res.forEach(element =>{
             tableDisplayQuestionAnswers(element)
-            // commentsPerAnswer(element.ans_id)
+            commentsPerAnswer(element.ans_id)
         })
 
         let updateForm = document.querySelector("#editForm #formFields")
@@ -327,8 +329,8 @@ const comments = (answerId, data)=>{
     })
     .then((res) => {
         alert(res.Successful) 
-        commentsPerAnswer(res.AnswerId)
-        // window.location.reload()
+        // commentsPerAnswer(res.AnswerId)
+        window.location.reload()
     })
     .catch(error => {return error})
 }
