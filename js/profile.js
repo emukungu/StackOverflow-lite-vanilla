@@ -14,7 +14,7 @@ let tableDisplaysAllQns = data =>{
     // The function displays all questions in a table
     let allquestionsTable = document.querySelector("#allquestionsTable")
     let row = document.createElement("tr")
-    row.innerHTML = `<td><a href="#">${data.title}</a></td><td>${data.username}</td><td>${data.date_created}</td>`
+    row.innerHTML = `<td class="allQns"><a href="#">${data.title}</a></td><td>${data.username}</td><td>${data.date_created}</td>`
     allquestionsTable.appendChild(row)      
 }
 
@@ -29,21 +29,23 @@ let tableDisplayQuestionAnswers = data =>{
     let row = document.createElement("tr")
     row.innerHTML = `<td class="td1">
                         <a href="#" class = "answers">${data.answer}</a>
-                        <div class="commentsperAnswer"></div>
+                        <div><select class="commentsperAnswer"><option>Comments</option></select></div>
                      </td>
                      <td>${data.answered_user} </td>
                      <td>
                         <div>
-                            <button type="button">&#8593</button>
-                            <button type="button">&#8595</button></div><a href="#" class="comment">Add Comment</a>
+                            <button type="button" class="up_vote" value="upvote">&#8593</button><span id="total_vote">Total</span>
+                            <button type="button" class="down_vote" value="downvote">&#8595</button></div>
+                            <a href="#" class="comment">Add Comment</a>
                      </td>`
     answers.appendChild(row)
 }
 let displayComments = (data) =>{
-    let parent = document.querySelector(".commentsPerAnswer")
-    let child = document.createElement("p")
-    child.innerHTML = `${data.comment}`  
-    parent.appendChild(child)  
+    let ansComment = document.querySelectorAll(".commentsperAnswer")
+    let child = document.createElement("OPTION")
+    child.innerHTML = `${data.comment}` 
+    ansComment[i].appendChild(child)
+
 }
 
 
@@ -182,7 +184,7 @@ const deleteqn = (questionId)=>{
     .then(response =>{
         if(response.status == 204){
             alert("Question has been deleted")
-            window.location.href = "home.html";
+            window.location.href = "allQuestions.html";
         }
         else if(response.status == 401){
             alert("You have no access priviledges")
@@ -190,7 +192,7 @@ const deleteqn = (questionId)=>{
         }
         else if(response.status == 405){
             alert("Question does not exist OR check  if this is the question you posted.")
-            window.location.href = "home.html"
+            window.location.href = "allQuestions.html"
         }
     })
     .catch(error =>{return error})
@@ -206,9 +208,7 @@ const answersPerQuestion = (questionId) =>{
     .then(data =>{let res = data.Results
         res.forEach(element =>{
             tableDisplayQuestionAnswers(element)
-            // element.forEach(comment =>{
-                commentsPerAnswer(element.ans_id)
-            // })
+            // commentsPerAnswer(element.ans_id)
         })
 
         let updateForm = document.querySelector("#editForm #formFields")
@@ -230,6 +230,7 @@ const answersPerQuestion = (questionId) =>{
                     })
                 })
             }
+        // let ansComment = document.querySelectorAll(".commentsperAnswer")
         let comment = document.querySelectorAll(".comment")
         for(let i = 0; i<comment.length; i++){
             comment[i].addEventListener("click", ()=>{
@@ -245,10 +246,25 @@ const answersPerQuestion = (questionId) =>{
                     postCommentHandler(ansIdcomment, updateForm)
                     editForm.style.display= "none";
                     container.style.opacity= "1";
-                    commentForm.style.opacity= "1";
-                    
-                    })  
-            })
+                    commentForm.style.opacity= "1";                    
+                    })  })
+            let upVote = document.querySelectorAll(".up_vote")
+            for(let i =0; i<upVote.length; i++){
+                upVote[i].addEventListener("click", ()=>{
+                    let ansId = `${res[i].ans_id}`
+                    let dbupvote = upVote[i].value
+                    totalVotes(ansId, dbupvote)
+                })
+            }
+            let downVote = document.querySelectorAll(".down_vote")
+            for(let i =0; i<downVote.length; i++){
+                downVote[i].addEventListener("click", ()=>{
+                    let ansId = `${res[i].ans_id}`
+                    let dbdownvote = downVote[i].value
+                    totalVotes(ansId, dbdownvote)
+                })
+            }
+
         }
     })
     .catch(error => {return error})
@@ -270,17 +286,18 @@ const updateOrPreferredAnswer = (questionId, answerId, data) =>{
     .catch(error => {return error})
 }
 
-const upVotedownVote = (data) =>{
+const totalVotes = (answerId, data) =>{
     fetch(url + `/answers/${answerId}`, {
-        method: "PUT",
+        method: "POST",
         mode:"cors",
         headers: {"Content-Type":"application/json",
                 "Authorization":"Bearer " + localStorage.getItem("token")},
         body: JSON.stringify(data)                 
     })
     .then(respone => {return response.json()})
-    .then(data => { return data.message
-        // alert(data.message)
+    .then(data => { return data.total
+        // display votes
+
     })
     .catch(error => {return error})
 }
@@ -312,7 +329,8 @@ const comments = (answerId, data)=>{
     })
     .then((res) => {
         alert(res.Successful) 
-        window.location.reload()
+        commentsPerAnswer(res.AnswerId)
+        // window.location.reload()
     })
     .catch(error => {return error})
 }

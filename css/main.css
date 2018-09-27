@@ -55,11 +55,13 @@ body{
     margin: 30px;
 }
 .menu{
-    float: left;    
+    float: left; 
+    padding-top: 10px;   
 }
 .signupmenu li, .menu li{
     display: inline;
     margin-right: 10px;
+    
 }
 .signupForm button{
     font-size: 18px;

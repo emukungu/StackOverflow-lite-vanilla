@@ -130,6 +130,17 @@ body{
 #allquestionsTable a{
     text-decoration-line: none;
 }
+#question h2, #describe{
+    overflow-wrap: break-word;
+}
+#search{
+    line-height: 25px;
+    margin-right: -6px;
+    padding-left: 5px;
+}
+#submit_search{
+    line-height: 25px;
+}
 @media screen and (max-width: 600px){
     /* * {
         outline: 1px solid red;
@@ -166,8 +177,12 @@ body{
     color: blueviolet;
     margin-bottom: 30px;
 }
-.td1{
+.td1, .allQns{
     text-align: left;
+    max-width: 150px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    
 }
 #comment .modal-header, #comment .modal-content{
     border-top-left-radius: 0px;

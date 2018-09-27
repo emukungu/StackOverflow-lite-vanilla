@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/userProfile.css">
+</head>
+<body>
+    <div class="flex-profile-container">
+        <div class="navbar">
+            <div class="signupLinks">
+                <ul class="menu">
+                    <li><a href="allQuestions.html" target="#">Home</a></li>
+                    <li><a href="">Features</a></li>
+                    <li><a href="">Blog</a></li>
+                </ul>
+                <ul class="signupmenu"> 
+                    <input type="text" name="search" id="search" placeholder="Search">
+                    <button type="submit" id="submit_search">Submit</button>                  
+                </ul>
+            </div>
+        </div>
+        <div class="flex-container2">
+            <div class="col-1">
+                <div>
+                    <h2>USER ACCOUNT</h2>
+                    <a href="#" id="useraccount">esther</a>
+                    <p>Activity</p>
+                </div>
+            </div>
+            <div class="col-2">
+                <div id="title">
+                    <h1>ALL QUESTIONS</h1>
+                    <button type="button" id="post">Post Question</button>
+                </div>
+                <div class="body home">
+                    <table id="allquestionsTable">
+                        <tr><td><h2>Title</h2></td><td><h2>Posted by:</h2></td><td><h2>Date</h2></td></tr>
+                    </table>                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="postForm">
+        <div class="introduction modal-header">
+            <span class="close" id = "closeHome">&times;</span>
+            <h1>Post a Question</h1>
+        </div>
+        <div class="signupForm modal-content">                
+            <form  id="formFields">
+                <label for="title">Title</label>
+                <input type="text" placeholder="Title" id="title">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>            
+    </div>
+    <div class="footer">
+        <div class="navbar">
+            <p>Copyright 2018</p>
+        </div>
+    </div>
+    <script>
+        var post = document.getElementById("post");    
+        var postForm = document.getElementById("postForm");
+        var container = document.getElementsByClassName("flex-container2")[0];
+        var closeHome = document.getElementById("closeHome");
+
+        post.addEventListener("click", function(){
+        container.style.opacity= "0.1";
+        postForm.style.display="block";
+        })
+
+        closeHome.addEventListener("click", function(){
+        container.style.opacity= "1";
+        postForm.style.display="none";
+        })
+
+        const postQuestionForm = document.querySelector("#postForm #formFields")
+        postQuestionForm.addEventListener("submit", (event)=>{
+        event.preventDefault()
+        postQuestionHandler(postQuestionForm)
+        let postForm = document.querySelector("#postForm")
+        postForm.style.display= "none";
+    })
+    </script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

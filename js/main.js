@@ -50,7 +50,7 @@ const login = (login_data)=>{
     .then((data) => {
         localStorage.setItem("token", data.token)
         console.log(data.token)
-        window.location.replace("home.html")}
+        window.location.replace("allQuestions.html")}
     )
     .catch((error) => {return error})
 }
