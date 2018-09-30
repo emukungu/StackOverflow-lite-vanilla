@@ -1,5 +1,5 @@
 //BUSINESS LOGIC
-let url =`http://localhost:5000/api/v1`
+let url =`https://stackoverflow-esther.herokuapp.com/api/v1`
 
 //TABLES
 let tableDisplaysPostedQns = (data) =>{
@@ -28,26 +28,32 @@ let tableDisplayQuestionAnswers = data =>{
     let answers = document.querySelector(".answers")
     let row = document.createElement("tr")
     row.innerHTML = `<td class="td1">
-                        <a href="#" class = "answers">${data.answer}</a>
+                        <a href="#" class = "answersqn">${data.answer}</a>
                         <div><select class="commentsperAnswer"><option>Comments</option></select></div>
                      </td>
                      <td>${data.answered_user} </td>
                      <td>
                         <div>
-                            <button type="button" class="up_vote" value="upvote">&#8593</button><span id="total_vote">Total</span>
-                            <button type="button" class="down_vote" value="downvote">&#8595</button></div>
+                            <button type="submit" class="up_vote" value="upvote">&#8593</button><span class="total_vote"></span>
+                            <button type="submit" class="down_vote" value="downvote">&#8595</button></div>
                             <a href="#" class="comment">Add Comment</a>
                      </td>`
     answers.appendChild(row)
 }
-let displayComments = (data) =>{
-    let ansComment = document.querySelectorAll(".commentsperAnswer")
-    let child = document.createElement("OPTION")
-    child.innerHTML = `${data.comment}` 
-    for(let i = 0; i<ansComment.length; i++){
-        ansComment[i].appendChild(child)
-    }
-    
+
+let tableDisplaysComments = data=>{
+    // let answers = document.querySelector(".answersqn")
+    let comm = document.createElement("ul")
+
+    let comments = document.querySelectorAll(".commentsperAnswer")
+    let opt = document.createElement("option")
+    opt.innerHTML = `${data.comment}`
+    for(let i = 0;  i<comments.length;i++){
+        comments[i].appendChild(opt)
+        // for(let i = 0; i<comments.length; i++){
+        //     comments[i].appendChild(opt)
+        // }
+    }  
 }
 
 
@@ -81,7 +87,8 @@ const postQuestion = (data) =>{
     .then((data) => {
         let res= data.Results
         tableDisplaysPostedQns(res)
-        alert(data.Successful)        
+        alert(data.Successful)
+        window.location.reload()       
     })
     .catch((error) => {return error})  
 }
@@ -210,7 +217,7 @@ const answersPerQuestion = (questionId) =>{
             tableDisplayQuestionAnswers(element)
             commentsPerAnswer(element.ans_id)
         })
-
+            
         let updateForm = document.querySelector("#editForm #formFields")
         let x = document.querySelectorAll(".td1 a")
         for(let i = 0; i<x.length; i++){
@@ -248,11 +255,13 @@ const answersPerQuestion = (questionId) =>{
                     container.style.opacity= "1";
                     commentForm.style.opacity= "1";                    
                     })  })
+
             let upVote = document.querySelectorAll(".up_vote")
             for(let i =0; i<upVote.length; i++){
                 upVote[i].addEventListener("click", ()=>{
                     let ansId = `${res[i].ans_id}`
-                    let dbupvote = upVote[i].value
+                    let upvote = upVote[i].value
+                    let dbupvote = {vote:upvote}
                     totalVotes(ansId, dbupvote)
                 })
             }
@@ -260,7 +269,8 @@ const answersPerQuestion = (questionId) =>{
             for(let i =0; i<downVote.length; i++){
                 downVote[i].addEventListener("click", ()=>{
                     let ansId = `${res[i].ans_id}`
-                    let dbdownvote = downVote[i].value
+                    let downvote = downVote[i].value
+                    let dbdownvote = {vote:downvote}
                     totalVotes(ansId, dbdownvote)
                 })
             }
@@ -287,7 +297,7 @@ const updateOrPreferredAnswer = (questionId, answerId, data) =>{
 }
 
 const totalVotes = (answerId, data) =>{
-    fetch(url + `/answers/${answerId}`, {
+    fetch(url + `/answers/${answerId}/vote`, {
         method: "POST",
         mode:"cors",
         headers: {"Content-Type":"application/json",
@@ -295,9 +305,11 @@ const totalVotes = (answerId, data) =>{
         body: JSON.stringify(data)                 
     })
     .then(respone => {return response.json()})
-    .then(data => { return data.total
+    .then(data => { 
         // display votes
-
+        let votes = document.querySelector(".total_vote")
+        votes.innerHTML = `${data.total_votes}`        
+        
     })
     .catch(error => {return error})
 }
@@ -328,9 +340,9 @@ const comments = (answerId, data)=>{
         }
     })
     .then((res) => {
-        alert(res.Successful) 
-        // commentsPerAnswer(res.AnswerId)
+        alert(res.Successful)
         window.location.reload()
+        
     })
     .catch(error => {return error})
 }
@@ -344,8 +356,8 @@ const commentsPerAnswer = (answerId) =>{
     .then(res => {return res.json()})
     .then(data =>{let res = data.Results
         res.forEach(element =>{
-            displayComments(element)
-        })
+            tableDisplaysComments(element)
+        })        
     }).catch(error =>{return error})
 }
 
@@ -377,7 +389,7 @@ let updateAnswerHandler = (questionId, answerId, form)=>{
 }
 
 let postCommentHandler = (answerId, form)=>{
-    // This function retrieves the user input data for posting a question's answer
+    // This function retrieves the user input data for commenting
     let answer = form.edited_answer.value
     let comment = {comment: answer}
 
@@ -422,6 +434,10 @@ window.onload = function(){
             let qn = data.qn_id
             deleteqn(qn)
         })
+    
+    // let answerqns = document.querySelectorAll(".answersqn")
+    // for(let i = 0; i<answerqns.length; i++){
 
+    // }
     
 }

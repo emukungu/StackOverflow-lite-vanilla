@@ -1,5 +1,5 @@
 //BUSINESS LOGIC
-let url = 'http://localhost:5000/api/v1';
+let url = 'https://stackoverflow-esther.herokuapp.com/api/v1';
 
 const signup = (signup_data, form) =>{
     /*Signup a user*/
@@ -47,7 +47,7 @@ const login = (login_data)=>{
             alert("User doesnot exist on this platform")
         }
     })
-    .then((res) => {let data = res.results
+    .then((res) => {let data = res
         localStorage.setItem("token", data.token)
         localStorage.setItem("username", data.username)
         window.location.replace("allQuestions.html")}
@@ -119,8 +119,8 @@ window.onload = function(){
         introduction.style.display = "block";
     })
 
-    const signupForm = document.querySelector(".signupForm #formFields")
-    const loginForm = document.querySelector(".modal #formFields")
+    const signupForm = document.querySelector(".signupForm .formFields")
+    const loginForm = document.querySelector(".modal .formFields")
     
     signupForm.addEventListener("submit", (event)=>{
         event.preventDefault()
