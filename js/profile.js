@@ -1,23 +1,7 @@
 //BUSINESS LOGIC
-let url =`https://stackoverflow-esther.herokuapp.com/api/v1`
+let url = `http://localhost:5000/api/v1`;
 
 //TABLES
-let tableDisplaysPostedQns = (data) =>{
-    // This function displays every post and assigns questionId attribute
-    let allquestionsTable = document.querySelector("#allquestionsTable")
-    let row = document.createElement("tr") 
-    row.innerHTML = `<td><a href="#">${data.title}</a></td><td>${data.username}</td><td>${data.date_created}</td>`
-    allquestionsTable.appendChild(row) 
-}
-
-let tableDisplaysAllQns = data =>{
-    // The function displays all questions in a table
-    let allquestionsTable = document.querySelector("#allquestionsTable")
-    let row = document.createElement("tr")
-    row.innerHTML = `<td class="allQns"><a href="#">${data.title}</a></td><td>${data.username}</td><td>${data.date_created}</td>`
-    allquestionsTable.appendChild(row)      
-}
-
 let tableDisplaysSpecificqn =(data) =>{
     let title = document.querySelector("#question h2")
     title.innerHTML = `${data.title}`
@@ -42,113 +26,14 @@ let tableDisplayQuestionAnswers = data =>{
 }
 
 let tableDisplaysComments = data=>{
-    // let answers = document.querySelector(".answersqn")
-    let comm = document.createElement("ul")
-
-    let comments = document.querySelectorAll(".commentsperAnswer")
+    let comments = document.querySelector(".commentsperAnswer")
     let opt = document.createElement("option")
     opt.innerHTML = `${data.comment}`
-    for(let i = 0;  i<comments.length;i++){
-        comments[i].appendChild(opt)
-        // for(let i = 0; i<comments.length; i++){
-        //     comments[i].appendChild(opt)
-        // }
-    }  
+    comments.appendChild(opt)  
 }
 
 
 //API ENDPOINTS
-const postQuestion = (data) =>{
-    //This function add a question to the database
-    fetch(url + `/questions`, {
-        method: "POST",
-        mode:"cors",
-        headers: {"Content-Type":"application/json",
-                "Authorization":"Bearer " + localStorage.getItem("token")},
-        body: JSON.stringify(data)
-    })
-    .then((response) =>{
-        if(response.status == 201){
-            return response.json();
-        }
-        else if(response.status == 400){
-            alert("Fill in the missing fields")
-            window.location.reload()
-        }
-        else if(response.status == 409){
-            alert("Question already exists")
-            window.location.reload()
-        }
-        else if(response.status == 401){
-            alert("You have no access priviledges")
-            window.location.reload()
-        }
-    })
-    .then((data) => {
-        let res= data.Results
-        tableDisplaysPostedQns(res)
-        alert(data.Successful)
-        window.location.reload()       
-    })
-    .catch((error) => {return error})  
-}
-
-const getAllQuestions = ()=>{
-    //This function fetch all questions from the database
-    fetch(url + `/questions`,{
-        method:"GET",
-        mode:'cors',
-        headers:{"Content-Type":"application/json"}
-    } )
-    .then((response) => {
-        if(response.status == 200){
-            return response.json();
-        }
-        else if(response.status == 404){
-            console.log("No questions exist")            
-        }
-    })
-    .then((data) => {
-        let res = data.Results 
-        res.forEach(element =>{
-            tableDisplaysAllQns(element)
-            })  
-        let x = document.querySelectorAll("#allquestionsTable a")        
-        for(let i = 0; i<x.length; i++){
-            x[i].addEventListener("click", ()=>{
-                let qnid = `${res[i].qn_id}`
-                getSpecificQuestion(qnid)                
-            }) }
-
-        })
-    .catch((error) => {return error})
-}
-  
-const getSpecificQuestion = (questionId) => {
-    // This function retrieves a specific question details and answers
-    fetch(url + `/questions/${questionId}`)
-    .then((response) => {
-        if(response.status == 200){
-            return response.json();
-        }
-        else if(response.status == 404){
-            alert("The question doesnot exist on this platform")
-            window.location.reload()
-        }
-        else if(response.status == 405){
-            alert("Enter the correct URL")
-            window.location.reload()
-        }
-    })
-    .then((data) => {
-        localStorage.setItem("title", data.Question.title)
-        localStorage.setItem("desc", data.Question.description)
-        localStorage.setItem("qn", data.Question.qn_id)
-        window.location.href="questionDetails.html"
-    })        
-    .catch((error) => {return error})
-}
-
 const postAnswer = (questionId, data) =>{
     // This function add a question's answer to the database
     fetch(url + `/questions/${questionId}/answers`, {
@@ -218,7 +103,7 @@ const answersPerQuestion = (questionId) =>{
             commentsPerAnswer(element.ans_id)
         })
             
-        let updateForm = document.querySelector("#editForm #formFields")
+        let updateForm = document.querySelector("#editForm .formFields")
         let x = document.querySelectorAll(".td1 a")
         for(let i = 0; i<x.length; i++){
             x[i].addEventListener("click", ()=>{
@@ -237,7 +122,6 @@ const answersPerQuestion = (questionId) =>{
                     })
                 })
             }
-        // let ansComment = document.querySelectorAll(".commentsperAnswer")
         let comment = document.querySelectorAll(".comment")
         for(let i = 0; i<comment.length; i++){
             comment[i].addEventListener("click", ()=>{
@@ -362,15 +246,6 @@ const commentsPerAnswer = (answerId) =>{
 }
 
 //USER DATA
-let postQuestionHandler = (form)=>{
-    // This function retrieves the user input data for posting a question
-    let title = form.title.value
-    let description = form.description.value
-    let question_data = {title: title,
-        description: description}
-
-    postQuestion(question_data)
-}
 
 let postAnswerHandler = (questionId, form)=>{
     // This function retrieves the user input data for posting a question's answer
@@ -404,13 +279,11 @@ window.onload = function(){
     let username = localStorage.getItem("username")
     let useraccount = document.querySelector("#useraccount")
     useraccount.innerHTML = username
-
-    getAllQuestions()
-
+    
     useraccount.addEventListener("click", ()=>{
         window.location.href = "userProfile.html"       
     })
-    
+
     const title = localStorage.getItem("title")
     const desc = localStorage.getItem("desc")
     const qn_id = localStorage.getItem("qn")
@@ -422,7 +295,7 @@ window.onload = function(){
     tableDisplaysSpecificqn(data)
     answersPerQuestion(data.qn_id)
 
-    const postAnswerForm = document.querySelector("#comment #formFields")
+    const postAnswerForm = document.querySelector("#comment .formFields")
     postAnswerForm.addEventListener("submit", (event)=>{
         event.preventDefault()
         let qn_id = data.qn_id 
@@ -434,10 +307,5 @@ window.onload = function(){
             let qn = data.qn_id
             deleteqn(qn)
         })
-    
-    // let answerqns = document.querySelectorAll(".answersqn")
-    // for(let i = 0; i<answerqns.length; i++){
-
-    // }
     
 }

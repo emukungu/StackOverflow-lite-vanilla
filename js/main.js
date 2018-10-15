@@ -1,5 +1,5 @@
 //BUSINESS LOGIC
-let url = 'https://stackoverflow-esther.herokuapp.com/api/v1';
+let url = 'http://localhost:5000/api/v1';
 
 const signup = (signup_data, form) =>{
     /*Signup a user*/
