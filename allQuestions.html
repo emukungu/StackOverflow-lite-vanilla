@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/userProfile.css">
+</head>
+<body>
+    <div class="flex-profile-container">
+        <div class="navbar">
+            <div class="signupLinks">
+                <ul class="signupmenu"> 
+                    <li><a>username:</a></li>
+                    <li><a href="userProfile.html" id="useraccount" target="#">esther</a></li>                  
+                </ul>
+            </div>
+        </div>
+        <div class="flex-container2">
+            <div class="col-1">
+            </div>
+            <div class="col-2">
+                <div id="title">
+                    <h1>ALL QUESTIONS</h1>
+                    <button type="button" id="post">Post Question</button>
+                </div>
+                <div class="body home">
+                    <table id="allquestionsTable">
+                        <tr><td><h2>Title</h2></td><td><h2>Posted by:</h2></td><td><h2>Date</h2></td></tr>
+                    </table>                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="postForm">
+        <div class="introduction modal-header">
+            <span class="close" id = "closeHome">&times;</span>
+            <h1>Post a Question</h1>
+        </div>
+        <div class="signupForm modal-content">                
+            <form  class="formFields">
+                <label for="title">Title</label>
+                <input type="text" placeholder="Title" id="title">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>            
+    </div>
+    <div class="footer">
+        <div class="navbar">
+            <p>Copyright 2018</p>
+        </div>
+    </div>
+    <script>
+
+        let tableDisplaysPostedQns = (data) =>{
+            // This function displays every post and assigns questionId attribute
+            let allquestionsTable = document.querySelector("#allquestionsTable")
+            let row = document.createElement("tr") 
+            row.innerHTML = `<td><a href="#">${data.title}</a></td><td>${data.username}</td><td>${data.date_created}</td>`
+            allquestionsTable.appendChild(row) 
+        }
+
+        let tableDisplaysAllQns = data =>{
+            // The function displays all questions in a table
+            let allquestionsTable = document.querySelector("#allquestionsTable")
+            let row = document.createElement("tr")
+            row.innerHTML = `<td class="allQns"><a href="#">${data.title}</a></td>
+                             <td>${data.username}</td><td>${data.date_created}</td>`
+            allquestionsTable.appendChild(row)      
+        }   
+
+        let urlqn = `http:localhost:5000/api/v1`
+
+        const postQuestion = (data) =>{
+            //This function add a question to the database
+            fetch(urlqn + `/questions`, {
+            method: "POST",
+            mode:"cors",
+            headers: {"Content-Type":"application/json",
+                      "Authorization":"Bearer " + localStorage.getItem("token")},
+            body: JSON.stringify(data)
+        })
+        .then((response) =>{
+            if(response.status == 201){
+                return response.json();
+            }
+            else if(response.status == 400){
+                alert("Fill in the missing fields")
+                window.location.reload()
+            }
+            else if(response.status == 409){
+                alert("Question already exists")
+                window.location.reload()
+            }
+            else if(response.status == 401){
+                alert("You have no access priviledges")
+                window.location.reload()
+            }
+        })
+        .then((data) => {
+            let res= data.Results
+            tableDisplaysPostedQns(res)
+            alert(data.Successful)
+            window.location.reload()       
+        })
+        .catch((error) => {return error})  
+        }
+
+        const getAllQuestions = ()=>{
+            //This function fetch all questions from the database
+            fetch(urlqn + `/questions`,{
+            method:"GET",
+            mode:'cors',
+            headers:{"Content-Type":"application/json"}
+        } )
+        .then((response) => {
+            if(response.status == 200){
+                return response.json();
+            }
+            else if(response.status == 404){
+                alert("No questions exist")            
+            }
+        })
+        .then((data) => {
+            let res = data.Results 
+            res.forEach(element =>{
+                tableDisplaysAllQns(element)
+                })  
+            let x = document.querySelectorAll("#allquestionsTable a")        
+            for(let i = 0; i<x.length; i++){
+                x[i].addEventListener("click", ()=>{
+                    let qnid = `${res[i].qn_id}`
+                    getSpecificQuestion(qnid)                
+                }) }
+
+            })
+        .catch((error) => {return error})
+        }
+    
+        let postQuestionHandler = (form)=>{
+            // This function retrieves the user input data for posting a question
+            let title = form.title.value
+            let description = form.description.value
+            let question_data = {title: title,
+            description: description}
+
+            postQuestion(question_data)
+        }
+
+        const getSpecificQuestion = (questionId) => {
+            // This function retrieves a specific question details and answers
+            fetch(urlqn + `/questions/${questionId}`)
+            .then((response) => {
+                if(response.status == 200){
+                    return response.json();
+                }
+                else if(response.status == 404){
+                    alert("The question doesnot exist on this platform")
+                    window.location.reload()
+                }
+                else if(response.status == 405){
+                    alert("Enter the correct URL")
+                    window.location.reload()
+            }
+            })
+            .then((data) => {
+                localStorage.setItem("title", data.Question.title)
+                localStorage.setItem("desc", data.Question.description)
+                localStorage.setItem("qn", data.Question.qn_id)
+                window.location.href="questionDetails.html"
+            })        
+            .catch((error) => {return error})
+        }
+
+        getAllQuestions()
+
+        var post = document.getElementById("post");    
+        var postForm = document.getElementById("postForm");
+        var container = document.getElementsByClassName("flex-container2")[0];
+        var closeHome = document.getElementById("closeHome");
+
+        post.addEventListener("click", function(){
+        container.style.opacity= "0.1";
+        postForm.style.display="block";
+        })
+
+        closeHome.addEventListener("click", function(){
+        container.style.opacity= "1";
+        postForm.style.display="none";
+        })
+
+        const postQuestionForm = document.querySelector("#postForm .formFields")
+        postQuestionForm.addEventListener("submit", (event)=>{
+        event.preventDefault()
+        postQuestionHandler(postQuestionForm)
+        let postForm = document.querySelector("#postForm")
+        postForm.style.display= "none";
+        container.style.opacity= "1"; 
+    })
+    </script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

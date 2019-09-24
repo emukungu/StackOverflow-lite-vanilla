@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Details</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/userProfile.css">
+</head>
+<body>
+    <div class="flex-profile-container">
+        <div class="navbar">
+            <div class="signupLinks">
+                <ul class="menu">
+                    <li><a href="allQuestions.html">Home</a></li>
+                </ul>
+                
+                <ul class="signupmenu">                        
+                    <li><a>username:</a></li>
+                    <li><a href="userProfile.html" id="useraccount" target="#">esther</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex-container2">
+            <div class="col-1">
+            </div>
+            <div class="col-2">
+                <div id="title">
+                    <h1>QUESTION</h1>
+                    <button type="button" id="delete">DELETE</button>
+                </div>
+                <div class="body home details">
+                    <div id="question">
+                        <h2>TDD</h2>
+                        <p id="describe">
+                            I am new to the concept of TDD. This is my first program in which I use TDD.
+                            Can someone simplify what TDD means exactly?
+                        </p>
+                        
+                    </div>
+                    <div class="answers">
+                        <table>
+                            <tr><td id="td1"><h3>ANSWERS</h3></td><td><h3>POSTED BY:</h3></td>
+                                <td><h3>VOTES:</h3>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div id="comment">
+            <div class="introduction modal-header">            
+                <h3>YOUR ANSWER</h3>
+            </div>
+            <div class="signupForm modal-content">                
+                <form  class="formFields">
+                    <textarea name="description" id="answer" cols="30" rows="10"></textarea>
+                    <button type="submit">POST</button>
+                </form>
+            </div>            
+        </div>
+    </div>
+    <div class="modal" id="editForm">
+        <div class="introduction modal-header">
+            <span class="close" id="closeHome">&times;</span>
+            <h1>Update Answer</h1>
+        </div>
+        <div class="signupForm modal-content">                
+            <form  class="formFields">
+                <label for="description"></label>
+                <textarea name="description" id="edited_answer" cols="20" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>            
+    </div>
+    <div class="footer">
+        <div class="navbar">
+            <p>Copyright 2018</p>
+        </div>
+    </div>
+    <script>   
+            var container = document.getElementsByClassName("flex-container2")[0];
+            var closeHome = document.getElementById("closeHome");
+            var commentForm = document.getElementById("comment");   
+            
+            closeHome.addEventListener("click", function(){
+                container.style.opacity= "1";
+                editForm.style.display="none";
+                comment.style.opacity= "1";
+                }) 
+        </script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

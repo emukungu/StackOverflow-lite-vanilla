@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/userProfile.css">
+</head>
+<body>
+    <div class="flex-profile-container">
+        <div class="navbar">
+            <div class="signupLinks">
+                <ul class="menu">
+                    <li><a href="allQuestions.html" target="#">Home</a></li>
+                </ul>
+                <ul class="signupmenu">                        
+                    <li><a href="#" id="logout">Logout</a></li>
+                </ul>
+                
+            </div>
+        </div>
+        <div class="flex-container2">
+            <div class="col-1">
+                <div id="userAvatar"><img src="./img/profile-picture.jpg" alt=""></div>
+                <div>
+                    <p id="useraccount"></p>
+                    <button type="button" id="profile">Edit Profile</button>
+                </div>
+            </div>
+            <div class="col-2">
+                <div id="title">
+                    <h1>User Questions</h1>
+                    <div class="count">
+                        <div><label for="qnsasked"> Total Questions</label><button type="button" class="qns">10</button></div>
+                        <div><label for="answersgiven">Total Answers</label><button type="button" class="qns">20</button></div>
+                    </div>
+                   
+                </div>
+                <div id="user_qns">
+                    <ul id="ul_qns">
+                    </ul>
+                </div>
+            </div>
+            <div class="col-3">
+                <h2>Recently Asked Questions</h2>
+                <ul>
+                    <li>Javascript Syntax?</li>
+                    <li>Javascript Variables</li>
+                    <li>Python OOP</li>
+                </ul>    
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="postForm">
+        <div class="introduction modal-header">
+            <span class="close" id="closeHome">&times;</span>
+            <h1>Post Question</h1>
+        </div>
+        <div class="signupForm modal-content">                
+            <form  id="formFields">
+                <label for="title">Title</label>
+                <input type="text" placeholder="Title">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="20" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>            
+    </div>
+    <div class="footer">
+        <div class="navbar">
+           <p>Copyright 2018</p>
+        </div>
+    </div>
+    <script>
+        let tableDisplaysAllUserQns = (data) =>{
+            // The function displays all questions in a table
+            let allUserQuestionsTable = document.querySelector("#ul_qns")
+            let listed = document.createElement("li")
+            listed.innerHTML = `<a href="#">${data.title}</a>`
+            allUserQuestionsTable.appendChild(listed)      
+        }
+
+        const allQnsUserAsked = () =>{
+            fetch(`http://localhost:5000/api/v1/user/questions`, {
+            method: "GET",
+            mode:"cors",
+            headers: {"Content-Type":"application/json",
+                "Authorization":"Bearer " + localStorage.getItem("token")}      
+        })
+        .then(response => {return response.json()})
+        .then((data) => {
+            let res = data.Results 
+            console.log(data.message)
+            res.forEach((element) =>{
+                tableDisplaysAllUserQns(element)
+                })
+            })
+        .catch(error =>{return error})
+        }
+        allQnsUserAsked()
+
+        const logout = () =>{
+            fetch(`http://localhost:5000/api/v1/logout`, {
+            method: "GET",
+            mode:"cors",
+            headers: {"Content-Type":"application/json"}      
+        })
+        .then(response => {return response.json()})
+        .then((data) => { alert(data.message)
+            window.location.href ="home.html"
+            })
+        .catch(error =>{return error})
+        }
+
+        let logout_user = document.querySelector("#logout")
+        logout_user.addEventListener("click", ()=>{
+            localStorage.clear()
+            logout()
+        })
+    </script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

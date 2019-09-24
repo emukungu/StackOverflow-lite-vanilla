@@ -1,0 +1,139 @@
+body{
+    background: rgba(0, 0, 0, 0.9);    
+}
+.flex-container{
+    display: flex;
+    flex-direction: column;    
+    
+}
+.navbar{
+    background-color: rgba(0, 0, 0);
+    height: 3%;
+    margin-top: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: 120px;
+} 
+.signupLinks{
+    width: 60%;
+    margin: auto;
+    text-align: right;
+    padding-top: 10px;
+}
+.signupLinks li a{
+    color: white;
+    text-decoration-line: none;
+    font-size: 20px;
+}
+.flex-container2{
+    display: flex;  
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;         
+}
+.signupForm{
+    background-color: white; 
+    width: 400px; 
+    border-radius: 10px;
+}
+.signupForm input, button{
+    line-height: 40px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding-left: 10px;
+    outline: 0px;
+}
+.introduction{
+    color: white;
+    width: 400px;
+    padding-top: 70px; 
+    font-size: 20px; 
+}
+.formFields{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+.menu{
+    float: left; 
+    padding-top: 10px;   
+}
+.signupmenu li, .menu li{
+    display: inline;
+    margin-right: 10px;
+    
+}
+.signupForm button{
+    font-size: 18px;
+    background-color:#26D357; 
+    color: white;
+}
+@media screen and (max-width: 600px){
+    .flex-container{
+        width: 100%;
+    }
+    .flex-container2{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .signupForm, .introduction{
+        width: 95%;
+        margin: auto;
+    }
+    .signupLinks{
+        display: flex;
+        width: 100%;
+        margin-left: 0px;
+        flex-wrap: wrap;
+    }    
+    .navbar {
+        height: 5%;
+        margin-bottom: 0px;        
+    } 
+}
+.close{
+    float: right;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.close:focus, .close:hover{
+    cursor: pointer;
+}
+.modal{
+    display: none;
+    width: 40%;
+    margin: auto;
+    margin-top: 200px;
+    position: fixed;
+    top: 0px;
+    left: 35%;
+    z-index: 1;
+    
+    
+}
+.modal-header{
+    background-color: white;
+    color: black;
+    line-height: 60px;
+    padding-top: 3px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: -32px;
+    
+}
+.modal-content{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+@media screen and (max-width:600px){
+    .modal{        
+        width: 100%;    
+        position: fixed;
+        top: 10px;  
+        left: 3px; 
+    }
+}
